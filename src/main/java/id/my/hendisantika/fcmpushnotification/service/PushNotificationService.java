@@ -1,5 +1,6 @@
 package id.my.hendisantika.fcmpushnotification.service;
 
+import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +37,14 @@ public class PushNotificationService {
     public void sendSamplePushNotification() {
         try {
             fcmService.sendMessageWithoutData(getSamplePushNotificationRequest());
+        } catch (InterruptedException | ExecutionException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    public void sendPushNotification(PushNotificationRequest request) {
+        try {
+            fcmService.sendMessage(getSamplePayloadData(), request);
         } catch (InterruptedException | ExecutionException e) {
             logger.error(e.getMessage());
         }
