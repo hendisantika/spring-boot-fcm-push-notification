@@ -70,4 +70,9 @@ public class FCMService {
         return getPreconfiguredMessageBuilder(request).setToken(request.getToken())
                 .build();
     }
+
+    private Message getPreconfiguredMessageWithoutData(PushNotificationRequest request) {
+        return getPreconfiguredMessageBuilder(request).setTopic(request.getTopic())
+                .build();
+    }
 }
