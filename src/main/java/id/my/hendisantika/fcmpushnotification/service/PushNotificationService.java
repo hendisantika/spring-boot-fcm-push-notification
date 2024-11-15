@@ -49,4 +49,13 @@ public class PushNotificationService {
             logger.error(e.getMessage());
         }
     }
+
+    public void sendPushNotificationWithoutData(PushNotificationRequest request) {
+        try {
+            fcmService.sendMessageWithoutData(request);
+        } catch (InterruptedException | ExecutionException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
 }
