@@ -1,8 +1,14 @@
 package id.my.hendisantika.fcmpushnotification.controller;
 
+import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
+import id.my.hendisantika.fcmpushnotification.model.PushNotificationResponse;
 import id.my.hendisantika.fcmpushnotification.service.PushNotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,5 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PushNotificationController {
 
     private PushNotificationService pushNotificationService;
+
+    @PostMapping("/notification/topic")
+    public ResponseEntity sendNotification(@RequestBody PushNotificationRequest request) {
+        pushNotificationService.sendPushNotificationWithoutData(request);
+        return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."), HttpStatus.OK);
+    }
 
 }
