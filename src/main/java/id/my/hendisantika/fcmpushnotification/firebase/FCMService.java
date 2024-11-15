@@ -66,4 +66,8 @@ public class FCMService {
                 .setAps(Aps.builder().setCategory(topic).setThreadId(topic).build()).build();
     }
 
+    private Message getPreconfiguredMessageToToken(PushNotificationRequest request) {
+        return getPreconfiguredMessageBuilder(request).setToken(request.getToken())
+                .build();
+    }
 }
