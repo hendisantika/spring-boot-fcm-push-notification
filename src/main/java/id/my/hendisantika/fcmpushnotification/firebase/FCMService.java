@@ -1,11 +1,14 @@
 package id.my.hendisantika.fcmpushnotification.firebase;
 
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidNotification;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -46,5 +49,13 @@ public class FCMService {
 
     private String sendAndGetResponse(Message message) throws InterruptedException, ExecutionException {
         return FirebaseMessaging.getInstance().sendAsync(message).get();
+    }
+
+    private AndroidConfig getAndroidConfig(String topic) {
+        return AndroidConfig.builder()
+                .setTtl(Duration.ofMinutes(2).toMillis()).setCollapseKey(topic)
+                .setPriority(AndroidConfig.Priority.HIGH)
+                .setNotification(AndroidNotification.builder().setSound(NotificationParameter.SOUND.getValue())
+                        .setColor(NotificationParameter.COLOR.getValue()).setTag(topic).build()).build();
     }
 }
