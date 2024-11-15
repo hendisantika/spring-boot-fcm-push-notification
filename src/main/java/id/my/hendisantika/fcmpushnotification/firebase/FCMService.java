@@ -1,5 +1,6 @@
 package id.my.hendisantika.fcmpushnotification.firebase;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -43,4 +44,7 @@ public class FCMService {
         logger.info("Sent message to token. Device token: " + request.getToken() + ", " + response);
     }
 
+    private String sendAndGetResponse(Message message) throws InterruptedException, ExecutionException {
+        return FirebaseMessaging.getInstance().sendAsync(message).get();
+    }
 }
