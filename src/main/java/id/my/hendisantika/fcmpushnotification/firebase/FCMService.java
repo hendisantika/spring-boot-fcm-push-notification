@@ -28,4 +28,11 @@ public class FCMService {
         String response = sendAndGetResponse(message);
         logger.info("Sent message with data. Topic: " + request.getTopic() + ", " + response);
     }
+
+    public void sendMessageWithoutData(PushNotificationRequest request)
+            throws InterruptedException, ExecutionException {
+        Message message = getPreconfiguredMessageWithoutData(request);
+        String response = sendAndGetResponse(message);
+        logger.info("Sent message without data. Topic: " + request.getTopic() + ", " + response);
+    }
 }
