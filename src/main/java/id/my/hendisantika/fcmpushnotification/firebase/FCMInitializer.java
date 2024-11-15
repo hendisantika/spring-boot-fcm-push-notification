@@ -52,7 +52,7 @@ public class FCMInitializer {
                 .builder()
                 .setCredentials(googleCredentials)
                 .build();
-        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "my-app");
+        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "notifikasi");
         return FirebaseMessaging.getInstance(app);
     }
 }
