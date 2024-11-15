@@ -19,4 +19,8 @@ import org.springframework.stereotype.Service;
 public class NotificationService {
 
     private final SimpMessagingTemplate template;
+
+    public void sendNotification(String message) {
+        template.convertAndSend("/topic/notifications", message);
+    }
 }
