@@ -35,4 +35,12 @@ public class FCMService {
         String response = sendAndGetResponse(message);
         logger.info("Sent message without data. Topic: " + request.getTopic() + ", " + response);
     }
+
+    public void sendMessageToToken(PushNotificationRequest request)
+            throws InterruptedException, ExecutionException {
+        Message message = getPreconfiguredMessageToToken(request);
+        String response = sendAndGetResponse(message);
+        logger.info("Sent message to token. Device token: " + request.getToken() + ", " + response);
+    }
+
 }
