@@ -3,9 +3,11 @@ package id.my.hendisantika.fcmpushnotification.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,5 +30,14 @@ public class PushNotificationService {
 
     public PushNotificationService(FCMService fcmService) {
         this.fcmService = fcmService;
+    }
+
+    @Scheduled(initialDelay = 60000, fixedDelay = 60000)
+    public void sendSamplePushNotification() {
+        try {
+            fcmService.sendMessageWithoutData(getSamplePushNotificationRequest());
+        } catch (InterruptedException | ExecutionException e) {
+            logger.error(e.getMessage());
+        }
     }
 }
