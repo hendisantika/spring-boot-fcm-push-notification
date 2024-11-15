@@ -1,12 +1,15 @@
 package id.my.hendisantika.fcmpushnotification.service;
 
+import id.my.hendisantika.fcmpushnotification.firebase.FCMService;
 import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -21,6 +24,7 @@ import java.util.concurrent.ExecutionException;
  * Time: 07.23
  * To change this template use File | Settings | File Templates.
  */
+@Slf4j
 @Service
 public class PushNotificationService {
 
