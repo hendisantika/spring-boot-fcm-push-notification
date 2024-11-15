@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PushNotificationController {
 
-    private PushNotificationService pushNotificationService;
+    private final PushNotificationService pushNotificationService;
 
     @PostMapping("/notification/topic")
     public ResponseEntity sendNotification(@RequestBody PushNotificationRequest request) {
