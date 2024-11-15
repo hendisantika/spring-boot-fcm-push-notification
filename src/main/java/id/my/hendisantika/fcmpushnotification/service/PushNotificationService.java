@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -64,6 +65,13 @@ public class PushNotificationService {
         } catch (InterruptedException | ExecutionException e) {
             logger.error(e.getMessage());
         }
+    }
+
+    private Map<String, String> getSamplePayloadData() {
+        Map<String, String> pushData = new HashMap<>();
+        pushData.put("messageId", defaults.get("payloadMessageId"));
+        pushData.put("text", defaults.get("payloadData") + " " + LocalDateTime.now());
+        return pushData;
     }
 
 }
