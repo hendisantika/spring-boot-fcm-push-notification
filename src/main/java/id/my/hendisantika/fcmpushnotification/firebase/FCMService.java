@@ -85,8 +85,13 @@ public class FCMService {
     private Message.Builder getPreconfiguredMessageBuilder(PushNotificationRequest request) {
         AndroidConfig androidConfig = getAndroidConfig(request.getTopic());
         ApnsConfig apnsConfig = getApnsConfig(request.getTopic());
+        Notification notification = Notification
+                .builder()
+                .setTitle(request.getTitle())
+                .setBody(request.getMessage())
+                .build();
         return Message.builder()
                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig).setNotification(
-                        new Notification(request.getTitle(), request.getMessage()));
+                        notification);
     }
 }
