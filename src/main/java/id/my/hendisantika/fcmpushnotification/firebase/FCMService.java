@@ -2,6 +2,8 @@ package id.my.hendisantika.fcmpushnotification.firebase;
 
 import com.google.firebase.messaging.AndroidConfig;
 import com.google.firebase.messaging.AndroidNotification;
+import com.google.firebase.messaging.ApnsConfig;
+import com.google.firebase.messaging.Aps;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
@@ -58,4 +60,10 @@ public class FCMService {
                 .setNotification(AndroidNotification.builder().setSound(NotificationParameter.SOUND.getValue())
                         .setColor(NotificationParameter.COLOR.getValue()).setTag(topic).build()).build();
     }
+
+    private ApnsConfig getApnsConfig(String topic) {
+        return ApnsConfig.builder()
+                .setAps(Aps.builder().setCategory(topic).setThreadId(topic).build()).build();
+    }
+
 }
