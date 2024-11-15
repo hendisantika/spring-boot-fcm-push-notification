@@ -47,7 +47,7 @@ public class FCMInitializer {
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
         GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(new ClassPathResource("google/fcm.json").getInputStream());
+                .fromStream(new ClassPathResource("google/notifikasi.json").getInputStream());
         FirebaseOptions firebaseOptions = FirebaseOptions
                 .builder()
                 .setCredentials(googleCredentials)

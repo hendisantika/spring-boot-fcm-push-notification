@@ -32,9 +32,7 @@ class PushNotificationControllerTest {
 
     @Test
     public void sendTestMessageViaAPI() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-                "/notification"
-        ).accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/notification").accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
     }
