@@ -1,9 +1,12 @@
 package id.my.hendisantika.fcmpushnotification.firebase;
 
+import com.google.firebase.messaging.Message;
+import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,5 +22,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class FCMService {
 
-    private final Logger logger = LoggerFactory.getLogger(FCMService.class);
+    public void sendMessage(Map<String, String> data, PushNotificationRequest request)
+            throws InterruptedException, ExecutionException {
+        Message message = getPreconfiguredMessageWithData(data, request);
+        String response = sendAndGetResponse(message);
+        logger.info("Sent message with data. Topic: " + request.getTopic() + ", " + response);
+    }
 }
