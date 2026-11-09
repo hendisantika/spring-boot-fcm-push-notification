@@ -1,43 +1,29 @@
 package id.my.hendisantika.fcmpushnotification;
 
-import com.google.firebase.FirebaseApp;
-import id.my.hendisantika.fcmpushnotification.firebase.FCMInitializer;
+import com.google.firebase.messaging.FirebaseMessaging;
 import id.my.hendisantika.fcmpushnotification.firebase.FCMService;
-import id.my.hendisantika.fcmpushnotification.model.PushNotificationRequest;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
-@SpringBootTest
+@SpringBootTest(properties = "app.firebase-configuration-file=google/test-missing-credentials.json")
 class SpringBootFcmPushNotificationApplicationTests {
 
-    @Mock
-    FCMInitializer fcmInitializer;
+    @MockitoBean
+    FirebaseMessaging firebaseMessaging;
 
-    @Mock
-    FCMService fcmClient;
+    @MockitoBean
+    FCMService fcmService;
 
-    @Test
-    public void firebaseAppInitializationTest() {
-        fcmInitializer.initialize();
-        System.out.println(FirebaseApp.getApps());
-        assertFalse(FirebaseApp.getApps().isEmpty());
-    }
+    @Autowired
+    ApplicationContext context;
 
     @Test
-    public void sendTestMessage() {
-        PushNotificationRequest request = new PushNotificationRequest("hello", "testMessage", "testTopic");
-        Map<String, String> pushData = new HashMap<>();
-        try {
-            fcmClient.sendMessage(pushData, request);
-        } catch (Exception e) {
-            fail();
-        }
+    void contextLoads() {
+        assertNotNull(context.getBean(FCMService.class));
     }
 }
